@@ -1,13 +1,15 @@
 package example
 
-import com.typesafe.config.ConfigFactory
+import com.typesafe.config.{Config, ConfigFactory}
 
 object Hello extends App {
   val conf = ConfigFactory.load
-  println("conf.getString(\"simple\") is " + conf.getString("simple"))
-  println("conf.getString(\"definedInAnother\") is " + conf.getString("definedInAnother"))
-  println("conf.getString(\"mergedFromAnother\") is " + conf.getString("mergedFromAnother"))
-  println("conf.getString(\"application.mergedFromAnother\") is " + conf.getString("application.mergedFromAnother"))
-  println("conf.getString(\"application.additionalFromAnother\") is " + conf.getString("application.additionalFromAnother"))
-  println("conf.getString(\"application.additionalFromApplication\") is " + conf.getString("application.additionalFromApplication"))
+  printConf(conf, "simple")
+  printConf(conf, "definedInAnother")
+  printConf(conf, "mergedFromAnother")
+  printConf(conf, "application.mergedFromAnother")
+  printConf(conf, "application.additionalFromAnother")
+  printConf(conf, "application.additionalFromApplication")
+
+  def printConf(conf: Config, key: String): Unit = println(s"""conf.getString("$key") is ${conf.getString(key)}""")
 }
